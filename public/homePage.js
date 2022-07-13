@@ -50,7 +50,7 @@ myMoneyManager.addMoneyCallback = data => ApiConnector.addMoney(data, response =
     ProfileWidget.showProfile(response.data);
     myMoneyManager.setMessage(response.success, `Счет пополнен успешно`);
   } else {
-    myMoneyManager.setMessage(response.success, `Ошибка пополнения счета`);
+    myMoneyManager.setMessage(response.success, `Ошибка ${response.error}`);
   }
 
 });
@@ -62,7 +62,7 @@ myMoneyManager.conversionMoneyCallback = data => ApiConnector.convertMoney(data,
     ProfileWidget.showProfile(response.data);
     myMoneyManager.setMessage(response.success, `Валюта успешно конвертирована`);
   } else {
-    myMoneyManager.setMessage(response.success, `Ошибка конвертации`);
+    myMoneyManager.setMessage(response.success, `Ошибка ${response.error}`);
   }
 })
 
@@ -73,7 +73,7 @@ myMoneyManager.sendMoneyCallback = data => ApiConnector.transferMoney(data, resp
     ProfileWidget.showProfile(response.data);
     myMoneyManager.setMessage(response.success, `Средства успешно переведены`);
   } else {
-    myMoneyManager.setMessage(response.success, `Ошибка перевода средств`);
+    myMoneyManager.setMessage(response.success, `Ошибка ${response.error}`);
   }
 })
 
@@ -98,9 +98,9 @@ favorite.addUserCallback = data => ApiConnector.addUserToFavorites(data, respons
     favorite.clearTable();
     favorite.fillTable(response.data);
     myMoneyManager.updateUsersList(response.data);
-    favorite.setMessage(response.status, `Пользователь  добавлен в избранное`);
+    favorite.setMessage(response.success, `Пользователь  добавлен в избранное`);
   } else {
-    favorite.setMessage(response.status, `Пользователь не найден`);
+    favorite.setMessage(response.success, `${response.error}`);
   }
 });
 
@@ -109,8 +109,8 @@ favorite.removeUserCallback = data => ApiConnector.removeUserFromFavorites(data,
     favorite.clearTable();
     favorite.fillTable(response.data);
     myMoneyManager.updateUsersList(response.data);
-    favorite.setMessage(response.status, `Пользователь удален из избранных`);
+    favorite.setMessage(response.success, `Пользователь удален из избранных`);
   } else {
-    favorite.setMessage(response.status, `Ошибка удаления пользователя`);
+    favorite.setMessage(response.success, `${response.error}`);
   }
 })
